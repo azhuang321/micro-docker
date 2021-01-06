@@ -1,8 +1,8 @@
 package main
 
 import (
-	"user/handler"
-	pb "user/proto"
+	"git.imooc.com/cap1573/user/handler"
+	pb "git.imooc.com/cap1573/user/proto"
 
 	"github.com/micro/micro/v3/service"
 	"github.com/micro/micro/v3/service/logger"
