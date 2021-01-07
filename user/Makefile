@@ -1,4 +1,3 @@
-
 GOPATH:=$(shell go env GOPATH)
 .PHONY: init
 init:
@@ -17,6 +16,10 @@ build:
 test:
 	go test -v ./... -cover
 
-.PHONY: docker
-docker:
-	docker build . -t user:latest
+.PHONY: dockerBuild
+dockerBuild:
+	sudo docker build -t user:latest .
+
+.PHONY: dockerRun
+dockerRun:
+	docker run -d user
