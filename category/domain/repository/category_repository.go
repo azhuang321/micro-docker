@@ -13,6 +13,9 @@ type ICategoryRepository interface {
 	DeleteCategoryByID(int64) error
 	UpdateCategory(*model.Category) error
 	FindAll() ([]*model.Category, error)
+	FindCategoryByName(string) (*model.Category, error)
+	FindCategoryByLevel(uint32) ([]model.Category, error)
+	FindCategoryByParent(int64) ([]model.Category, error)
 }
 
 func NewCategoryRepository(db *gorm.DB) ICategoryRepository {
@@ -49,4 +52,17 @@ func (u *CategoryRepository) UpdateCategory(category *model.Category) error {
 
 func (u *CategoryRepository) FindAll() (categoryAll []*model.Category, err error) {
 	return categoryAll, u.mysqlDb.Find(&categoryAll).Error
+}
+
+func (u *CategoryRepository) FindCategoryByName(categoryName string) (category *model.Category, err error) {
+	//todo 是否需要创建新的对象
+	return category, u.mysqlDb.Where("category_name = ?", categoryName).Find(category).Error
+}
+
+func (u *CategoryRepository) FindCategoryByLevel(level uint32) (category []model.Category, err error) {
+	return category, u.mysqlDb.Where("category_level = ?", level).Find(category).Error
+}
+
+func (u *CategoryRepository) FindCategoryByParent(parent int64) (category []model.Category, err error) {
+	return category, u.mysqlDb.Where("category_parent = ?", parent).Find(category).Error
 }
