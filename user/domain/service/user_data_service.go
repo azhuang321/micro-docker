@@ -38,7 +38,7 @@ func ValidatePassword(userPwd, hashedPwd string) (isOk bool, err error) {
 }
 
 //插入用户
-func (u UserDataService) AddUser(user *model.User) (userId int64, err error) {
+func (u *UserDataService) AddUser(user *model.User) (userId int64, err error) {
 	pwdByte, err := GeneratePassword(user.HashPassword)
 	if err != nil {
 		return user.ID, err
@@ -48,11 +48,11 @@ func (u UserDataService) AddUser(user *model.User) (userId int64, err error) {
 }
 
 //删除用户
-func (u UserDataService) DeleteUser(userId int64) error {
+func (u *UserDataService) DeleteUser(userId int64) error {
 	return u.UserRepository.DeleteUserByID(userId)
 }
 
-func (u UserDataService) UpdateUser(user *model.User, isChangePwd bool) error {
+func (u *UserDataService) UpdateUser(user *model.User, isChangePwd bool) error {
 	if isChangePwd {
 		pwdByte, err := GeneratePassword(user.HashPassword)
 		if err != nil {
@@ -63,11 +63,11 @@ func (u UserDataService) UpdateUser(user *model.User, isChangePwd bool) error {
 	return u.UserRepository.UpdateUser(user)
 }
 
-func (u UserDataService) FindUserByName(username string) (user *model.User, err error) {
+func (u *UserDataService) FindUserByName(username string) (user *model.User, err error) {
 	return u.UserRepository.FindUserByName(username)
 }
 
-func (u UserDataService) CheckPwd(username string, pwd string) (isOk bool, err error) {
+func (u *UserDataService) CheckPwd(username string, pwd string) (isOk bool, err error) {
 	user, err := u.UserRepository.FindUserByName(username)
 	if err != nil {
 		return false, err

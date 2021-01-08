@@ -38,28 +38,28 @@ func (u *UserRepository) InitTable() error {
 	return u.mysqlDb.CreateTable(&model.User{}).Error
 }
 
-func (u UserRepository) FindUserByName(username string) (user *model.User, err error) {
+func (u *UserRepository) FindUserByName(username string) (user *model.User, err error) {
 	user = &model.User{}
 	return user, u.mysqlDb.Where("user_name = ?", username).Find(user).Error
 }
 
-func (u UserRepository) FindUserByID(userId int64) (user *model.User, err error) {
+func (u *UserRepository) FindUserByID(userId int64) (user *model.User, err error) {
 	user = &model.User{}
 	return user, u.mysqlDb.First(user, userId).Error
 }
 
-func (u UserRepository) CreateUser(user *model.User) (userId int64, err error) {
+func (u *UserRepository) CreateUser(user *model.User) (userId int64, err error) {
 	return userId, u.mysqlDb.Create(user).Error
 }
 
-func (u UserRepository) DeleteUserByID(userId int64) error {
+func (u *UserRepository) DeleteUserByID(userId int64) error {
 	return u.mysqlDb.Where("id = ?", userId).Error
 }
 
-func (u UserRepository) UpdateUser(user *model.User) error {
+func (u *UserRepository) UpdateUser(user *model.User) error {
 	return u.mysqlDb.Model(user).Update(&user).Error
 }
 
-func (u UserRepository) FindAll() (userAll []model.User, err error) {
+func (u *UserRepository) FindAll() (userAll []model.User, err error) {
 	return userAll, u.mysqlDb.Find(&userAll).Error
 }
