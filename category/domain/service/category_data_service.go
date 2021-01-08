@@ -10,7 +10,7 @@ type ICategoryDataService interface {
 	DeleteCategory(categoryId int64) error
 	UpdateCategory(category *model.Category) error
 	FindCategoryById(categoryId int64) (category *model.Category, err error)
-	FindAllCategory() (category []*model.Category, err error)
+	FindAllCategory() (category []model.Category, err error)
 	FindCategoryByName(categoryName string) (*model.Category, error)
 	FindCategoryByLevel(level uint32) ([]model.Category, error)
 	FindCategoryByParent(parent int64) ([]model.Category, error)
@@ -43,7 +43,7 @@ func (u *CategoryDataService) FindCategoryById(categoryId int64) (category *mode
 	return u.CategoryRepository.FindCategoryByID(categoryId)
 }
 
-func (u *CategoryDataService) FindAllCategory() (category []*model.Category, err error) {
+func (u *CategoryDataService) FindAllCategory() (category []model.Category, err error) {
 	return u.CategoryRepository.FindAll()
 }
 

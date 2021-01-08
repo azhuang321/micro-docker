@@ -12,7 +12,7 @@ type ICategoryRepository interface {
 	CreateCategory(category *model.Category) (int64, error)
 	DeleteCategoryByID(int64) error
 	UpdateCategory(*model.Category) error
-	FindAll() ([]*model.Category, error)
+	FindAll() ([]model.Category, error)
 	FindCategoryByName(string) (*model.Category, error)
 	FindCategoryByLevel(uint32) ([]model.Category, error)
 	FindCategoryByParent(int64) ([]model.Category, error)
@@ -50,7 +50,7 @@ func (u *CategoryRepository) UpdateCategory(category *model.Category) error {
 	return u.mysqlDb.Model(category).Update(&category).Error
 }
 
-func (u *CategoryRepository) FindAll() (categoryAll []*model.Category, err error) {
+func (u *CategoryRepository) FindAll() (categoryAll []model.Category, err error) {
 	return categoryAll, u.mysqlDb.Find(&categoryAll).Error
 }
 
