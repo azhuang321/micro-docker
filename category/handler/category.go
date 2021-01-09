@@ -10,7 +10,7 @@ import (
 )
 
 type Category struct {
-	CateDataService service.CategoryDataService
+	CateDataService service.ICategoryDataService
 }
 
 //提供创建分类
