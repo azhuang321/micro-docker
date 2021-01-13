@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package product;
+package go.micro.service.product;
 
 option go_package = "proto;product";
 
